@@ -1,7 +1,7 @@
 package haxor.server;
 
-import haxor.server.AssimpService;
-import haxor.server.ControllerContainer;
+import haxor.server.ConvertService;
+import haxor.server.AssimpController;
 import nws.controller.Controller;
 import nws.controller.service.Service;
 
@@ -10,7 +10,7 @@ import nws.controller.service.Service;
  * Base class for all HaxorStudio services.
  * @author Eduardo Pons - eduardo@thelaborat.org
  */
-class ServiceController extends ControllerContainer
+class ServiceController extends Controller
 {
 
 	/**
@@ -19,7 +19,7 @@ class ServiceController extends ControllerContainer
 	override public function OnInitialize():Void 
 	{
 		//Add services components		
-		entity.AddComponent(AssimpService);
+		entity.AddComponent(ConvertService);
 
 	}
 	
