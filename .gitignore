@@ -1,3 +1,4 @@
-bin/
+assimp2json/
+deploy/
 src/.DS_Store
 src/haxor/.DS_Store

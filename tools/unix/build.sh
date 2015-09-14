@@ -1,1 +1,1 @@
-haxe -cp ./src -lib hxnodejs -lib nodews -js ./bin/app.js -D html -D profile -D js-es5 -D js-flatten -main haxor.server.AssimpApp -dce std
+haxe -cp ./src -lib hxnodejs -lib nodews -js ./deploy/server/app.js -D html -D profile -D js-es5 -D js-flatten -main haxor.server.AssimpApp -dce std
