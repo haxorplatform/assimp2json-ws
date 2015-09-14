@@ -1,0 +1,1 @@
+sudo forever start -a -l ./deploy/server/log.log -e ./deploy/server/err.log -o ./deploy/server/out.log --workingDir ./deploy/server ./deploy/server/app.js -vvvv

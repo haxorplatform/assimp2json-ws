@@ -9,8 +9,6 @@ import nws.Application;
 import nws.view.View;
 import nws.model.Model;
 
-import js.node.child_process.ChildProcess as ChildProcessObject;
-
 class AssimpApp extends ApplicationMVC<Model,View,AssimpController>
 {
 	/**
