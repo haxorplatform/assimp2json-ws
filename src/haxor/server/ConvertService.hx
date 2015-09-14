@@ -171,7 +171,7 @@ class ConvertService extends Service
 					var result : Buffer = Buffer.concat(buffers);
 					
 					p_callback(file_name, result, p_code, null);					
-					
+					/*
 					Timer.delay(function()
 					{
 						
@@ -182,9 +182,9 @@ class ConvertService extends Service
 								Log(p_error);
 							}					
 						});
-						//*/
+						
 					},5);
-					//*/
+					*/
 					
 				});	
 				

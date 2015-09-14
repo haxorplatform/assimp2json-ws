@@ -1,2 +1,4 @@
+cd deploy/server/
 localdir="$PWD"
-sudo forever start -a -l $localdir/deploy/server/log.log -e $localdir/deploy/server/err.log -o $localdir/deploy/server/out.log --workingDir $localdir/deploy/server --uid "assimp" $localdir/deploy/server/app.js -vvvv
+forever stop assimp
+sudo forever start -a -l $localdir/log.log -e $localdir/err.log -o $localdir/out.log --workingDir $localdir --uid "assimp" $localdir/app.js -vvvv
