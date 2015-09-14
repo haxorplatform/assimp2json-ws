@@ -55,8 +55,6 @@ class ConvertService extends Service
 	@route("post,options", "/$")	
 	function Convert():Void
 	{		
-	
-		
 		var s : HttpSession = session;	
 		var b : Buffer 		= s.data.buffer;
 		var err : Error 	= null;		
@@ -97,12 +95,12 @@ class ConvertService extends Service
 				}
 				else
 				{
-					Log("Assimp Complete code["+p_code+"] length["+p_result.length+" bytes]");					
-					session.response.setHeader("Content-disposition", "attachment; filename='"+p_file_name+".json'");
-					session.response.setHeader("Content-type", "application/json");
-					session.response.setHeader("Content-Length", p_result.length + "");				
-					session.response.write(p_result);
-					session.response.end();
+					Log("Assimp Complete id["+(untyped s.response.__id__)+"] code["+p_code+"] length["+p_result.length+" bytes]");					
+					s.response.setHeader("Content-disposition", "attachment; filename='"+p_file_name+".json'");
+					s.response.setHeader("Content-type", "application/json");
+					s.response.setHeader("Content-Length", p_result.length + "");				
+					s.response.write(p_result);
+					s.response.end();
 				}
 			});
 			
