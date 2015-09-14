@@ -1,3 +1,2 @@
-cd deploy/
-cd server/
+cd deploy/server/
 node app.js -vvvv

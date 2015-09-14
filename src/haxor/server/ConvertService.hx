@@ -34,7 +34,7 @@ class ConvertService extends Service
 	 * Path to the process.
 	 */
 	public var process(get, never):String;	
-	private function get_process():String { return assimp.unix ? "../assimp2json/bin/assimp2json" : ""; }
+	private function get_process():String { return assimp.unix ? "../../assimp2json/bin/assimp2json" : ""; }
 	
 	public var cmd(get, never):String;	
 	private function get_cmd():String { return assimp.unix ? "sh" : "assimp2json.exe"; }
@@ -107,7 +107,30 @@ class ConvertService extends Service
 		}
 		
 	}
-	
+
+	@route("get", "/test")	
+	function TestAssimp():Void
+	{	
+			var s : HttpSession = session;	
+			var data : Buffer = Fs.readFileSync("spider.obj");
+
+			RunAssimp("spider.obj", data, function(p_file_name:String,p_result:Buffer,p_code:Int, p_error:Error):Void
+			{
+				if (p_error != null)
+				{
+					Log(p_error);
+					s.response.write("fail");
+					s.response.end();
+				}
+				else
+				{
+					Log("Assimp Complete id["+(untyped s.response.__id__)+"] code["+p_code+"] length["+p_result.length+" bytes]");			
+					s.response.write(p_result);
+					s.response.end();
+				}
+			});
+
+	}
 	/**
 	 * Run Assimp Daemon
 	 * @param	p_file_path
@@ -147,47 +170,32 @@ class ConvertService extends Service
 				Log("Converting args["+arg_list.join(",")+"] path["+file_path+"] to["+file_name+"] exists["+exists+"]",1);
 		
 				//Default limit is 8k
-				var opt : ChildProcessSpawnOptions = cast { maxBuffer: 1024 * 1024 * 500 };
+				var opt : ChildProcessExecOptions = cast { maxBuffer: 1024 * 1024 * 500 };
 				
-				//Spawn showed to be more reliable
-				var cp : Dynamic = ChildProcess.spawn(cmd,arg_list,opt); 
-				
-				//Working with buffers is best for this kind of operation.
-				var buffers : Array<Buffer> = [];
-				
-				//Store all incoming buffers.
-				cp.stdout.on("data", function (d:Buffer) 
-				{						
-					buffers.push(d);			
-				});
-				
-				cp.on("error", function(p_error:Error):Void
+				ChildProcess.execFile(cmd, ["-c",process + " " + tmp_file], opt, function(p_error:ChildProcessExecError, p_stdout:Dynamic, p_stderr:Dynamic):Void
 				{
-					p_callback(file_name,null,1, p_error);					
-				});
-				
-				cp.on("close", function(p_code:Int)
-				{
-					var result : Buffer = Buffer.concat(buffers);
-					
-					p_callback(file_name, result, p_code, null);					
-					/*
-					Timer.delay(function()
-					{
-						
-						Fs.unlink(tmp_file, function(p_error:Error):Void
+					if (p_error == null) {	
+						p_callback(file_name, p_stdout, 0, null);
+
+						Timer.delay(function()
 						{
-							if (p_error != null)
+							Fs.unlink(tmp_file, function(p_error:Error):Void
 							{
-								Log(p_error);
-							}					
-						});
-						
-					},5);
-					*/
-					
-				});	
-				
+								if (p_error != null)
+								{
+									Log(p_error);
+								}					
+							});
+						},5);
+
+					} else {
+						Log("error : " + Json.stringify(p_error));
+						Log("stderr: " + Json.stringify(p_stderr));
+						Log("stdout: " + Json.stringify(p_stdout));
+						p_callback(file_name,null,1, p_error);	
+					}
+				});
+
 			}			
 		});
 	}
