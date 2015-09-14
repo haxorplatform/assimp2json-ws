@@ -1,1 +1,2 @@
-sudo forever start -a -l ./deploy/server/log.log -e ./deploy/server/err.log -o ./deploy/server/out.log --workingDir ./deploy/server ./deploy/server/app.js -vvvv
+localdir="$PWD"
+sudo forever start -a -l $localdir/deploy/server/log.log -e $localdir/deploy/server/err.log -o $localdir/deploy/server/out.log --workingDir $localdir/deploy/server $localdir/deploy/server/app.js -vvvv
