@@ -1,17 +1,17 @@
-assimp2json-ws
-========
+Assimp to Json Model Converter
+========  
 
-Assimp2Json Node.js Webservice
+This is a webservice that receives 3d model/scene files and convert to a simpler version `json` based.  
 
 ## CMake
-This webservice uses the `Assimp2Json` tool to convert the supported models to `json`.  
+This tool uses the `Assimp2Json` tool to convert the supported models to `json`.  
 For more information, visit [https://github.com/acgessler/assimp2json]  
 
 ### Build  
 The build system for `assimp2json` is CMake. To build, use either the CMake GUI or the CMake command line utility. __Note__: make sure you pulled the `assimp2json` submodule, i.e. with `git submodule init && git submodule update`
 
 ## Haxe
-This tool uses the Haxe language [http://www.haxe.org] and the NodeJS SDK to run. 
+Also, it uses the Haxe language [http://www.haxe.org] and the NodeJS SDK to run. 
 
 ### Install
 * `wget http://www.openfl.org/builds/haxe/haxe-3.2.0-linux-installer.tar.gz`
