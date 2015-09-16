@@ -1,0 +1,16 @@
+language: node_js
+
+node_js:
+  - "0.10"
+
+before_install:
+  - sudo add-apt-repository ppa:eyecreate/haxe -y
+  - sudo apt-get update
+  - sudo apt-get install haxe -y --force-yes
+  - mkdir ~/haxelib
+  - haxelib setup ~/haxelib
+  - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs
+  - haxelib git nodews https://github.com/haxorplatform/nodews.git
+
+script:
+  - haxe build.xml

@@ -1,0 +1,20 @@
+{
+  "name": "assimp2json-ws",
+  "url" :
+  "https://github.com/haxorplatform/assimp2json-ws/",
+  "license": "MIT",
+  "tags": ["js", "nodews", "assimp", "assimp2json"],
+  "description": "Assimp2Json Node.js Webservice",
+  "version": "0.0.1",
+  "releasenote": "Alpha",
+  "contributors": ["Henrique Dias", "Eduardo Pons"],
+  "dependencies": [{
+      "name": "hxnodejs",
+      "type": "git",
+      "url": "https://github.com/HaxeFoundation/hxnodejs"
+  },{
+      "name": "nodews",
+      "type": "git",
+      "url": "https://github.com/haxorplatform/nodews"
+  }]
+}
