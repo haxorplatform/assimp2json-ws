@@ -2,6 +2,7 @@ Assimp to Json Model Converter
 ========  
 
 This is a webservice that receives 3d model/scene files and convert to a simpler version `json` based.  
+[![Build Status](https://travis-ci.org/haxorplatform/assimp2json-ws.png?branch=master)](https://travis-ci.org/haxorplatform/assimp2json-ws)
 
 ## CMake
 This tool uses the `Assimp2Json` tool to convert the supported models to `json`.  
