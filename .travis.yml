@@ -14,3 +14,7 @@ before_install:
 
 script:
   - haxe build.hxml
+  - haxe test.hxml
+
+notifications:
+    email: false
