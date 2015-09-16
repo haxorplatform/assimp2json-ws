@@ -12,6 +12,7 @@ before_install:
   - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs
   - haxelib git nodews https://github.com/haxorplatform/nodews
   - haxelib git DefinitelyTyped https://github.com/francescoagati/DefinitelyTyped.hx
+  - haxelib git mocha https://github.com/rjanicek/mocha.js-haxe
 
 script:
   - haxe build.hxml
