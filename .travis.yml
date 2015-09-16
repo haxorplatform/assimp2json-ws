@@ -10,7 +10,8 @@ before_install:
   - mkdir ~/haxelib
   - haxelib setup ~/haxelib
   - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs
-  - haxelib git nodews https://github.com/haxorplatform/nodews.git
+  - haxelib git nodews https://github.com/haxorplatform/nodews
+  - haxelib git DefinitelyTyped https://github.com/francescoagati/DefinitelyT.hx
 
 script:
   - haxe build.hxml

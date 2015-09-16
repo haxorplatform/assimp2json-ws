@@ -1,0 +1,8 @@
+-cp ./src 
+-debug
+-D nodejs
+-js ./deploy/server/test.js 
+--remap sys:sys
+-main haxor.test.Test
+
+-cmd node ./deploy/server/test.js
