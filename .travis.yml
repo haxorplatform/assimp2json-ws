@@ -23,11 +23,11 @@ install:
   - npm install request --prefix=deploy/test/
 
 before_script:
+  - haxe build.hxml
   - ./tools/unix/forever.sh 
 
 script:
   - ./assimp2json/bin/assimp2json ./assimp2json/samples/spider.obj spider.obj.assimp.json
-  - haxe build.hxml
   - haxe test-haxe.hxml
 
 after_script: sudo forever stop assimp
