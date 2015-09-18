@@ -11,13 +11,12 @@ before_install:
   - haxelib setup ~/haxelib
   - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs
   - haxelib git nodews https://github.com/haxorplatform/nodews
-  - haxelib git DefinitelyTyped https://github.com/francescoagati/DefinitelyTyped.hx
-  - haxelib git mocha https://github.com/rjanicek/mocha.js-haxe
 
 install:
   - git submodule update --init --recursive
-  - cmake ./assimp2json/
-  - make install -C ./assimp2json/
+  - cd ./assimp2json/
+  - cmake . && make install
+  - cd ..
 
 script:
   - ./assimp2json/bin/assimp2json ./assimp2json/samples/spider.obj spider.obj.assimp.json
