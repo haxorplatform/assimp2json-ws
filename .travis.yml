@@ -20,6 +20,7 @@ install:
   - make install
   - cd ..
   - npm install forever -g
+  - mkdir deploy/test/
   - npm install request --prefix=deploy/test/
 
 before_script:
