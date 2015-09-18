@@ -30,7 +30,7 @@ script:
   - ./assimp2json/bin/assimp2json ./assimp2json/samples/spider.obj spider.obj.assimp.json
   - haxe test-haxe.hxml
 
-after_script: sudo forever stop assimp
+after_script: forever stop assimp
 
 notifications:
     email: false
