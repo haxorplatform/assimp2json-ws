@@ -29,7 +29,7 @@ class TestAsync extends AsyncTestCase
 	}
 
     function onLoaded(response:Dynamic) {
-    	var data : Dynamic = Fs.readFileSync("../assimp2json/samples/spider.obj.assimp.json", 'utf8');
+    	var data : Dynamic = Fs.readFileSync("./assimp2json/samples/spider.obj.assimp.json", 'utf8');
         assertTrue(clean(response.body)==clean(data));
     }
 
