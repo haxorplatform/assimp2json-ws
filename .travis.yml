@@ -15,7 +15,8 @@ before_install:
 install:
   - git submodule update --init --recursive
   - cd ./assimp2json/
-  - cmake . && make install
+  - cmake -D CMAKE_INSTALL_PREFIX:STRING=./ .
+  - make install
   - cd ..
 
 script:
