@@ -11,6 +11,7 @@ before_install:
   - haxelib setup ~/haxelib
   - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs
   - haxelib git nodews https://github.com/haxorplatform/nodews
+  - haxelib install async-tests
 
 install:
   - git submodule update --init --recursive
@@ -18,11 +19,18 @@ install:
   - cmake -D CMAKE_INSTALL_PREFIX:STRING=./install .
   - make install
   - cd ..
+  - npm install forever -g
+  - npm install request --prefix=deploy/test/
+
+before_script:
+  - ./tools/unix/forever.sh 
 
 script:
   - ./assimp2json/bin/assimp2json ./assimp2json/samples/spider.obj spider.obj.assimp.json
   - haxe build.hxml
   - haxe test-haxe.hxml
+
+after_script: sudo forever stop assimp
 
 notifications:
     email: false

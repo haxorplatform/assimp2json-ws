@@ -3,6 +3,7 @@
 -D nodejs
 -lib hxnodejs 
 -lib nodews 
+-lib async-tests
 -js ./deploy/test/test-haxe.js 
 --remap sys:sys
 -main haxor.test.Test

@@ -112,7 +112,7 @@ class ConvertService extends Service
 	function TestAssimp():Void
 	{	
 			var s : HttpSession = session;	
-			var data : Buffer = Fs.readFileSync("spider.obj");
+			var data : Buffer = Fs.readFileSync("../../assimp2json/samples/spider.obj");
 
 			RunAssimp("spider.obj", data, function(p_file_name:String,p_result:Buffer,p_code:Int, p_error:Error):Void
 			{

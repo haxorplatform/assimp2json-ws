@@ -4,9 +4,13 @@ package haxor.test;
 import sys.FileSystem;
 import haxe.unit.TestRunner;
 import haxor.test.TestBugs;
+import haxor.test.TestAsync;
+import async.tests.AsyncTestRunner;
 
 class Test
 {
+
+	public static var success : Bool;
 
 	static function main()
 	{
@@ -17,13 +21,18 @@ class Test
 		}
 
 		var runner = new TestRunner();
-		//runner.add(new TestSys());
-		//runner.add(new TestNode());
 		runner.add(new TestBugs());
-		// your can add others TestCase here
+		success = runner.run();
 
-		// Run them and and exit with the right return code
-		var success = runner.run();
-		(untyped process).exit(success ? 0 : 1);
+        var r = new async.tests.AsyncTestRunner(onComplete);
+        r.add(new TestAsync());
+        r.run();
+		
 	}
+
+    // function called when all tests finish
+    static function onComplete() {
+		(untyped process).exit(success ? 0 : 1);
+    }
+
 }
