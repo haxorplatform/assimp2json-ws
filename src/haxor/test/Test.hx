@@ -3,6 +3,7 @@ package haxor.test;
 
 import sys.FileSystem;
 import haxe.unit.TestRunner;
+import haxor.test.TestBugs;
 
 class Test
 {
@@ -18,7 +19,7 @@ class Test
 		var runner = new TestRunner();
 		//runner.add(new TestSys());
 		//runner.add(new TestNode());
-		//runner.add(new TestBugs());
+		runner.add(new TestBugs());
 		// your can add others TestCase here
 
 		// Run them and and exit with the right return code

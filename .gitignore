@@ -2,3 +2,4 @@ assimp2json/
 deploy/
 src/.DS_Store
 src/haxor/.DS_Store
+src/haxor/test/.DS_Store

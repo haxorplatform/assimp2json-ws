@@ -14,9 +14,15 @@ before_install:
   - haxelib git DefinitelyTyped https://github.com/francescoagati/DefinitelyTyped.hx
   - haxelib git mocha https://github.com/rjanicek/mocha.js-haxe
 
+install:
+  - git submodule update --init --recursive
+  - cmake ./assimp2json/
+  - make install -C ./assimp2json/
+
 script:
+  - ./assimp2json/bin/assimp2json ./assimp2json/samples/spider.obj spider.obj.assimp.json
   - haxe build.hxml
-  - haxe test.hxml
+  - haxe test-haxe.hxml
 
 notifications:
     email: false

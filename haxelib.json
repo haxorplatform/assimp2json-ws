@@ -16,5 +16,9 @@
       "name": "nodews",
       "type": "git",
       "url": "https://github.com/haxorplatform/nodews"
+  },{
+      "name": "mocha",
+      "type": "git",
+      "url": "https://github.com/rjanicek/mocha.js-haxe"
   }]
 }
