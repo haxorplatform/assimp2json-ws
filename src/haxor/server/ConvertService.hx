@@ -109,10 +109,12 @@ class ConvertService extends Service
 	}
 
 	@route("get", "/test")	
-	function TestAssimp():Void
+	public function TestAssimp(test=false):Bool
 	{	
-			var s : HttpSession = session;	
-			var data : Buffer = Fs.readFileSync("../../assimp2json/samples/spider.obj");
+			var s : HttpSession = session;
+			var filename : String = "../../assimp2json/samples/spider.obj";
+			if (test) filename = "./assimp2json/samples/spider.obj";
+			var data : Buffer = Fs.readFileSync(filename);
 
 			RunAssimp("spider.obj", data, function(p_file_name:String,p_result:Buffer,p_code:Int, p_error:Error):Void
 			{
@@ -129,6 +131,8 @@ class ConvertService extends Service
 					s.response.end();
 				}
 			});
+
+			return true;
 
 	}
 	/**
