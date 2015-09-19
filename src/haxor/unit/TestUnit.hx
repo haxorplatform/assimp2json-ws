@@ -47,11 +47,10 @@ class TestUnit extends Component
 	 */
 	override public function OnCreate():Void 
 	{
-		
-		success = 0;
-		fail    = 0;
-		timeout = 0;
-		tests	= [];
+		success  = 0;
+		fail     = 0;
+		timeout  = 0;
+		tests	 = [];
 		m_buffer = [];
 		var ml : Array<MetaData> = metadata;						
 		for (m in ml) { var is_test   : Bool = (m.data.Test != null) || (m.data.TestAsync != null); if (is_test) tests.push(m); }

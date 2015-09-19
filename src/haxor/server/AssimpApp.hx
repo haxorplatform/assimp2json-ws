@@ -6,24 +6,32 @@ import js.Node;
 import js.node.ChildProcess;
 import js.RegExp;
 import nws.Application;
+import nws.component.net.HttpComponent;
 import nws.view.View;
 import nws.model.Model;
 
-class AssimpApp extends ApplicationMVC<Model,View,AssimpController>
+class AssimpApp extends Application
 {
 	/**
 	 * Entry point.
 	 */
 	static function main():Void { new AssimpApp(); }
 	
-	
+	/**
+	 * Reference to the Http server.
+	 */
+	public var http : HttpComponent;
 	
 	/**
 	 * Entry point.
 	 */
 	override public function OnInitialize():Void 
-	{			
-		controller = cast AddComponent(AssimpController);
+	{	
+		Log("Created.");
+		//Must be added in the root for event propagating.		
+		http = cast entity.AddComponent(HttpComponent);
+		http.Listen(9090);		
+		entity.CreateChild("convert", ConvertService);
 	}	
 	
 }

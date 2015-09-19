@@ -21,7 +21,7 @@ class TestController extends TestUnit
 			var err : String = "";			
 			if (!success) err = "We found error :(";			
 			p_callback(err);			
-		},Std.int(500 + (Math.random() * 2000)));		
+		},Std.int(500 + (Math.random() * 2000)));
 	}
 	
 	@Test("Fail 50%")
