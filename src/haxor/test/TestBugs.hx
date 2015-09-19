@@ -2,8 +2,11 @@ package haxor.test;
 
 import js.Node;
 import haxor.server.ConvertService;
+import haxor.server.AssimpApp;
 import nws.Entity;
 import nws.Application;
+import nws.component.net.HttpSession;
+import js.node.http.ServerResponse;
 
 class TestBugs extends haxe.unit.TestCase
 {
@@ -14,6 +17,12 @@ class TestBugs extends haxe.unit.TestCase
 		var entity : Entity = new Entity();
 		entity.AddComponent(ConvertService);
 		convert = cast entity.GetComponent(ConvertService);
+
+		untyped Application.instance = cast { get_unix : function() { true; } };
+		untyped convert.m_session = { };
+		untyped convert.session.response = { };
+		untyped convert.session.response.write = function(s) { true; };
+		untyped convert.session.response.end = function() { true; };
 	}
 
 
@@ -24,7 +33,7 @@ class TestBugs extends haxe.unit.TestCase
 
 	public function testAssimp()
 	{
-		assertTrue( true ); //convert.TestAssimp(true)
+		assertTrue( convert.TestAssimp(true) );
 	}
 
 }
