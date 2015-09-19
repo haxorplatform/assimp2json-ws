@@ -1,5 +1,6 @@
 package haxor.test;
 import haxe.Timer;
+import haxor.unit.TestUnit;
 import js.Node;
 import nws.controller.Controller;
 
@@ -7,7 +8,7 @@ import nws.controller.Controller;
  * ...
  * @author Eduardo Pons - eduardo@thelaborat.org
  */
-class TestController extends Controller
+class TestController extends TestUnit
 {
 
 	@TestAsync("Async Request Test")
@@ -28,6 +29,20 @@ class TestController extends Controller
 	public function testDumb() : String
 	{
 		return Math.random() < 0.5 ? "Some random error!" : "";
+	}
+	
+	@TestAsync("Will Timeout Test",1.0)
+	@TestDescription("Forces the test to fail by timeout.","Eduardo")
+	public function testTimeout(p_callback:String->Void) : Void
+	{
+		//Delay wait 2s but timeout is 1s
+		Timer.delay(function()
+		{
+			var success :Bool = true;
+			var err : String = "";			
+			if (!success) err = "We found error :(";			
+			p_callback(err);			
+		},2000);		
 	}
 	
 	

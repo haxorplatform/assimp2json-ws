@@ -59,7 +59,7 @@
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
-    <option testMovie="Custom" />
+    <option testMovie="Webserver" />
     <option testMovieCommand="$(ProjectDir)/deploy/client/index.html" />
   </options>
   <!-- Plugin storage -->
