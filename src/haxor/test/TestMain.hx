@@ -1,6 +1,7 @@
 // from https://github.com/dionjwa/nodejs-std/blob/master/test/Test.hx
 package haxor.test;
 
+
 import sys.FileSystem;
 import haxe.unit.TestRunner;
 import haxor.test.TestBugs;
@@ -8,7 +9,7 @@ import haxor.test.TestAsync;
 import async.tests.AsyncTestRunner;
 
 
-class Test
+class TestMain
 {
 
 	public static var success : Bool;

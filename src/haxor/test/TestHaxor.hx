@@ -1,7 +1,9 @@
 package haxor.test;
 import haxe.Timer;
+import haxe.unit.Test;
+import haxe.unit.Assert;
 import haxor.server.ConvertService;
-import haxor.unit.TestUnit;
+
 import js.Node;
 import nws.Application;
 import nws.controller.Controller;
@@ -11,7 +13,7 @@ import nws.Entity;
  * ...
  * @author Eduardo Pons - eduardo@thelaborat.org
  */
-class TestHaxor extends TestUnit
+class TestHaxor extends Test
 {
 
 	public var convert : ConvertService;
@@ -32,56 +34,55 @@ class TestHaxor extends TestUnit
 		untyped convert.session.response = { };
 		untyped convert.session.response.write = function(s) { true; };
 		untyped convert.session.response.end = function() { true; };
+		
+		verbose = true;
 	}
 	
 	@TestAsync("Async Request Test")
 	@TestDescription("Validates if a simple request test works.","Eduardo")
-	public function testRequest(p_callback:String->Void) : Void
+	public function testRequest(a:Assert) : Void
 	{
-		Timer.delay(function()
+		var request = Node.require('request');		
+		request('http://localhost:9090/convert/test', function (error, response, body) 
 		{
-			var success :Bool = false;
-			var err : String = "";			
-			if (!success) err = "We found error :(";			
-			p_callback(err);			
-		},Std.int(500 + (Math.random() * 2000)));
+			a.NotNull(response, "Response is null!");
+			a.Done();		   	
+		});
+
 	}
 	
 	@Test("Fail 50%")
 	@TestDescription("Simple dumb test 50% of failing.","Eduardo")
-	public function testDumb() : String
+	public function testDumb(a:Assert) : Void
 	{
-		return Math.random() < 0.5 ? "Some random error!" : "";
+		a.False(Math.random() < 0.5, "Some random error!");
 	}
 	
 	@TestAsync("Will Timeout Test",1.0)
 	@TestDescription("Forces the test to fail by timeout.","Eduardo")
-	public function testTimeout(p_callback:String->Void) : Void
+	public function testTimeout(a:Assert) : Void
 	{
 		//Delay wait 2s but timeout is 1s
 		Timer.delay(function()
 		{
-			var success :Bool = true;
-			var err : String = "";			
-			if (!success) err = "We found error :(";			
-			p_callback(err);			
+			a.True(true, "Not true!");
+			a.Done();
 		},2000);		
 	}
 	
 	@Test("Get Temp Name")
 	@TestDescription("Get some temp name.","Henrique")
-	public function testGetTempName() : String
+	public function testGetTempName(a:Assert) : Void
 	{
-		if (convert.GetTempName().length == 24) return "";
-		return "wrong size!";
+		a.True(convert.GetTempName().length == 24, "Temp Name Fail");		
 	}
 
 	@Test("Test the Assimp.")
 	@TestDescription("I don't know!!!","Henrique")
-	public function testAssimp() : String
+	public function testAssimp(a:Assert) : Void
 	{		
-		if (convert.TestAssimp(true)) return "";
-		return "something is wrong";		
+		a.True(convert.TestAssimp(true), "Test Assimp Fail");
+			
 	}
 	
 	

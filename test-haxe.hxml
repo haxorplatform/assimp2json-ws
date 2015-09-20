@@ -2,10 +2,11 @@
 -debug
 -D nodejs
 -lib hxnodejs 
--lib nodews 
+-lib nodews
+-lib tddhx
 -lib async-tests
 -js ./deploy/test/test-haxe.js 
 --remap sys:sys
--main haxor.test.Test
+-main haxor.test.TestMain
 
 -cmd node ./deploy/test/test-haxe.js
