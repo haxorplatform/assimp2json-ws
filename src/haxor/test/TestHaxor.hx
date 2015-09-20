@@ -1,16 +1,39 @@
 package haxor.test;
 import haxe.Timer;
+import haxor.server.ConvertService;
 import haxor.unit.TestUnit;
 import js.Node;
+import nws.Application;
 import nws.controller.Controller;
+import nws.Entity;
 
 /**
  * ...
  * @author Eduardo Pons - eduardo@thelaborat.org
  */
-class TestController extends TestUnit
+class TestHaxor extends TestUnit
 {
 
+	public var convert : ConvertService;
+
+	
+	/**
+	 * Init.
+	 */
+	override private function OnTestCreate():Void 
+	{
+		trace("TestHaxor> Create!");
+		var entity : Entity = new Entity();
+		entity.AddComponent(ConvertService);
+		convert = cast entity.GetComponent(ConvertService);
+
+		untyped Application.instance = cast { get_unix : function() { true; } };
+		untyped convert.m_session = { };
+		untyped convert.session.response = { };
+		untyped convert.session.response.write = function(s) { true; };
+		untyped convert.session.response.end = function() { true; };
+	}
+	
 	@TestAsync("Async Request Test")
 	@TestDescription("Validates if a simple request test works.","Eduardo")
 	public function testRequest(p_callback:String->Void) : Void
@@ -43,6 +66,22 @@ class TestController extends TestUnit
 			if (!success) err = "We found error :(";			
 			p_callback(err);			
 		},2000);		
+	}
+	
+	@Test("Get Temp Name")
+	@TestDescription("Get some temp name.","Henrique")
+	public function testGetTempName() : String
+	{
+		if (convert.GetTempName().length == 24) return "";
+		return "wrong size!";
+	}
+
+	@Test("Test the Assimp.")
+	@TestDescription("I don't know!!!","Henrique")
+	public function testAssimp() : String
+	{		
+		if (convert.TestAssimp(true)) return "";
+		return "something is wrong";		
 	}
 	
 	
