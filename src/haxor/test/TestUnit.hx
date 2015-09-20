@@ -8,7 +8,7 @@ import nws.Application;
 import nws.component.net.HttpSession;
 import js.node.http.ServerResponse;
 
-class TestBugs extends haxe.unit.TestCase
+class TestUnit extends haxe.unit.TestCase
 {
 
 	var convert : ConvertService;

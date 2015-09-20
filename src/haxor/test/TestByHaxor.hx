@@ -4,12 +4,12 @@ package haxor.test;
 import haxe.Timer;
 import sys.FileSystem;
 
-class Test2Main
+class TestByHaxor
 {
 
 	static function main()
 	{
-		var test_haxor : TestHaxor = new TestHaxor();
+		var test_haxor : TestHolistic = new TestHolistic();
 		test_haxor.Run("Cool Testing",onComplete);		
 	}
 

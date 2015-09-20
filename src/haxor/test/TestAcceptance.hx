@@ -5,7 +5,7 @@ import js.node.Fs;
 import async.tests.AsyncTestCase;
 import haxe.Json;
 
-class TestAsync extends AsyncTestCase
+class TestAcceptance extends AsyncTestCase
 {
 
 	public function testRequest()

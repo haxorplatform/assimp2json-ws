@@ -7,6 +7,6 @@
 -lib async-tests
 -js ./deploy/test/test-haxe.js 
 --remap sys:sys
--main haxor.test.TestMain
+-main haxor.test.TestByHaxe
 
 -cmd node ./deploy/test/test-haxe.js

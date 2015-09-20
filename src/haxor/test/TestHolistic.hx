@@ -13,7 +13,7 @@ import nws.Entity;
  * ...
  * @author Eduardo Pons - eduardo@thelaborat.org
  */
-class TestHaxor extends Test
+class TestHolistic extends Test
 {
 
 	public var convert : ConvertService;
@@ -51,6 +51,7 @@ class TestHaxor extends Test
 
 	}
 	
+	/*
 	@Test("Fail 50%")
 	@TestDescription("Simple dumb test 50% of failing.","Eduardo")
 	public function testDumb(a:Assert) : Void
@@ -69,6 +70,7 @@ class TestHaxor extends Test
 			a.Done();
 		},2000);		
 	}
+	*/
 	
 	@Test("Get Temp Name")
 	@TestDescription("Get some temp name.","Henrique")

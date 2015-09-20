@@ -12,6 +12,7 @@ before_install:
   - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs
   - haxelib git nodews https://github.com/haxorplatform/nodews
   - haxelib install async-tests
+  - haxelib git tddhx https://github.com/haxorplatform/tddhx
 
 install:
   - git submodule update --init --recursive
@@ -29,7 +30,8 @@ before_script:
 
 script:
   - ./assimp2json/bin/assimp2json ./assimp2json/samples/spider.obj spider.obj.assimp.json
-  - haxe test-haxe.hxml
+  - haxe test-by-haxe.hxml
+  - haxe test-by-haxor.hxml
 
 after_script: forever stop assimp
 

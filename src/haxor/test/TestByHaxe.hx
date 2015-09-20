@@ -4,12 +4,12 @@ package haxor.test;
 
 import sys.FileSystem;
 import haxe.unit.TestRunner;
-import haxor.test.TestBugs;
-import haxor.test.TestAsync;
+import haxor.test.TestUnit;
+import haxor.test.TestAcceptance;
 import async.tests.AsyncTestRunner;
 
 
-class TestMain
+class TestByHaxe
 {
 
 	public static var success : Bool;
@@ -23,11 +23,11 @@ class TestMain
 		}
 		
 		var runner = new TestRunner();
-		runner.add(new TestBugs());
+		runner.add(new TestUnit());
 		success = runner.run();
 
         var r = new async.tests.AsyncTestRunner(onComplete);
-        r.add(new TestAsync());
+        r.add(new TestAcceptance());
         r.run();
 	}
 

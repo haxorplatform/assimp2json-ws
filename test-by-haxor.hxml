@@ -1,0 +1,11 @@
+-cp ./src 
+-debug
+-D nodejs
+-lib hxnodejs 
+-lib nodews 
+-lib tddhx
+-js ./deploy/test/test-haxor.js 
+--remap sys:sys
+-main haxor.test.TestByHaxor
+
+-cmd node ./deploy/test/test-haxor.js
