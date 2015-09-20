@@ -18,11 +18,13 @@ class TestBugs extends haxe.unit.TestCase
 		entity.AddComponent(ConvertService);
 		convert = cast entity.GetComponent(ConvertService);
 
-		untyped Application.instance = cast { get_unix : function() { true; } };
-		untyped convert.m_session = { };
-		untyped convert.session.response = { };
-		untyped convert.session.response.write = function(s) { true; };
-		untyped convert.session.response.end = function() { true; };
+		untyped {
+				Application.instance = cast { get_unix : function() { true; } };
+				convert.m_session = { };
+				convert.session.response = { };
+				convert.session.response.write = function(s) { true; };
+				convert.session.response.end = function() { true; };
+			}
 	}
 
 

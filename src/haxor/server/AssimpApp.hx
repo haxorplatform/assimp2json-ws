@@ -1,6 +1,5 @@
 package haxor.server;
 
-import haxor.server.AssimpController;
 import js.Error;
 import js.Node;
 import js.node.ChildProcess;
@@ -29,9 +28,9 @@ class AssimpApp extends Application
 	{	
 		Log("Created.");
 		//Must be added in the root for event propagating.		
-		http = cast entity.AddComponent(HttpComponent);
+		http = cast AddComponent(HttpComponent);
 		http.Listen(9090);		
-		entity.CreateChild("convert", ConvertService);
+		CreateChild("convert", ConvertService);
 	}	
 	
 }
