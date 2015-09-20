@@ -1,14 +1,16 @@
 package haxor.unit;
 import haxe.macro.Expr.ImportExpr;
+
 import haxe.Timer;
 import nws.component.Component;
 import nws.Resource.MetaData;
+import nws.Resource;
 
 /**
  * Component that when extended, implements and executes unit tests.
  * @author Eduardo Pons - eduardo@thelaborat.org
  */
-class TestUnit extends Component
+class TestUnit extends Resource
 {
 
 	/**
@@ -41,34 +43,42 @@ class TestUnit extends Component
 	 * Buffer of tests to be executed.
 	 */
 	private var m_buffer : Array<MetaData>;
+	private var m_on_complete : Bool->Void;
 	
 	/**
 	 * Init.
 	 */
-	override public function OnCreate():Void 
+	public function new():Void 
 	{
+		super();
 		success  = 0;
 		fail     = 0;
 		timeout  = 0;
 		tests	 = [];
 		m_buffer = [];
 		var ml : Array<MetaData> = metadata;						
-		for (m in ml) { var is_test   : Bool = (m.data.Test != null) || (m.data.TestAsync != null); if (is_test) tests.push(m); }
-		Log("Initialize tests["+length+"]",1);
+		for (m in ml) { var is_test   : Bool = (m.data.Test != null) || (m.data.TestAsync != null); if (is_test) tests.push(m); }		
+		OnTestCreate();
 	}
 	
 	/**
 	 * Callback called when testing is finished.
 	 */
-	private function OnTestComplete():Void { }
+	private function OnTestCreate():Void { }
+	
+	/**
+	 * Callback called when testing is finished.
+	 */
+	private function OnTestComplete(p_success:Bool):Void { }
 	
 		
 	/**
 	 * Run All Tests.
 	 * @param	p_title
 	 */
-	public function Run(p_title:String):Void
+	public function Run(p_title:String,p_on_complete:Bool->Void=null):Void
 	{		
+		m_on_complete = p_on_complete;
 		success = 0;
 		fail    = 0;
 		timeout = 0;
@@ -84,7 +94,9 @@ class TestUnit extends Component
 	{
 		if (m_buffer.length <= 0)
 		{
-			OnTestComplete();
+			var is_success :Bool = (fail <= 0) && (timeout <= 0);
+			OnTestComplete(is_success);
+			if (m_on_complete != null) m_on_complete(is_success);
 			trace("======= success["+success+"] fail["+fail+"] timeout["+timeout+"] =======");
 			return;
 		}
@@ -118,7 +130,8 @@ class TestUnit extends Component
 			
 			if (test_timeout >= 0)  Timer.delay(function() { is_timeout = true; }, Std.int(test_timeout * 1000));
 			
-			fn(function(res:String):Void
+			var afn : Dynamic = 
+			function(res:String):Void
 			{	
 				if (is_timeout)
 				{
@@ -140,11 +153,13 @@ class TestUnit extends Component
 					}
 				}
 				UnqueueTest();
-			});				
+			};
+			
+			Reflect.callMethod(this, fn,[afn]);			
 		}
 		else
 		{	
-			var res : String = fn();
+			var res : String = Reflect.callMethod(this, fn,[]);
 			if (res == "")
 			{
 				trace("[success] " + test_name); 

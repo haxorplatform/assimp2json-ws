@@ -23,7 +23,7 @@
     <option directives="nodejs&#xA;profile&#xA;js-es5&#xA;js-flatten" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
-    <option mainClass="haxor.server.AssimpApp" />
+    <option mainClass="haxor.test.Test2" />
     <option enabledebug="False" />
     <option additional="-dce std" />
   </build>
@@ -46,7 +46,7 @@
     <compile path="source\haxor\service\AppService.hx" />
     <compile path="source\haxor\server\ServerApp.hx" />
     <compile path="source\haxor\server\StudioApp.hx" />
-    <compile path="src\haxor\server\AssimpApp.hx" />
+    <compile path="src\haxor\test\Test2.hx" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>

@@ -7,6 +7,7 @@ import haxor.test.TestBugs;
 import haxor.test.TestAsync;
 import async.tests.AsyncTestRunner;
 
+
 class Test
 {
 
@@ -19,7 +20,7 @@ class Test
 		if (haxe.macro.Compiler.getDefine("nodejs") != "1") {
 			throw "nodejs compiler flag not defined";
 		}
-
+		
 		var runner = new TestRunner();
 		runner.add(new TestBugs());
 		success = runner.run();
@@ -27,11 +28,11 @@ class Test
         var r = new async.tests.AsyncTestRunner(onComplete);
         r.add(new TestAsync());
         r.run();
-		
 	}
 
     // function called when all tests finish
-    static function onComplete() {
+    static function onComplete() 
+	{
 		(untyped process).exit(success ? 0 : 1);
     }
 
